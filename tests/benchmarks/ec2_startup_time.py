@@ -1,17 +1,18 @@
 import asyncio
 import os
 import platform
+import sys
 from pprint import pprint
 from statistics import median
-import sys
 from time import monotonic
 
 from meadowrun.run_job import AllocCloudInstance, run_function
+import meadowrun.optional_eliot as eliot
 
 
 async def main():
 
-    nb_runs = 10
+    nb_runs = 1
 
     # hack to find the automated module.
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
@@ -24,14 +25,13 @@ async def main():
     times = []
     async with await irp.get_instance_registrar() as instance_registrar:
         for i in range(nb_runs):
-            await irp.clear_instance_registrar(instance_registrar)
-
             start_time = monotonic()
             pid1, host1 = await run_function(
                 remote_function,
                 AllocCloudInstance(1, 0.5, 80, irp.cloud_provider()),
             )
             times.append(monotonic() - start_time)
+            await irp.clear_instance_registrar(instance_registrar)
     print("Times in secs:")
     pprint(times)
     print(f"Min: {min(times):.2f}")
@@ -40,4 +40,6 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    with open("ec2_startup_time.log", "w", encoding="utf-8") as file:
+        eliot.to_file(file)
+        asyncio.run(main())

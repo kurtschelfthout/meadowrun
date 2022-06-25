@@ -30,6 +30,7 @@ from typing import (
 
 import cloudpickle
 
+import meadowrun.optional_eliot as eliot
 from meadowrun import local_code
 from meadowrun.aws_integration import s3
 from meadowrun.aws_integration.ec2_instance_allocation import (
@@ -47,7 +48,7 @@ from meadowrun.azure_integration.mgmt_functions.azure_core.azure_rest_api import
 )
 from meadowrun.conda import env_export, try_get_current_conda_env
 from meadowrun.config import JOB_ID_VALID_CHARACTERS, MEADOWRUN_INTERPRETER
-from meadowrun.credentials import CredentialsSourceForService, CredentialsService
+from meadowrun.credentials import CredentialsService, CredentialsSourceForService
 from meadowrun.deployment import (
     CodeDeployment,
     InterpreterDeployment,
@@ -83,6 +84,7 @@ from meadowrun.pip_integration import (
     pip_freeze_without_local_other_interpreter,
 )
 from meadowrun.run_job_core import CloudProviderType, Host, JobCompletion, SshHost
+from meadowrun.shared import log_call_async
 
 _T = TypeVar("_T")
 _U = TypeVar("_U")
@@ -777,6 +779,7 @@ class AllocCloudInstance(Host):
     cloud_provider: CloudProviderType
     region_name: Optional[str] = None
 
+    @log_call_async
     async def run_job(self, job: Job) -> JobCompletion[Any]:
         if self.cloud_provider == "EC2":
             return await run_job_ec2_instance_registrar(
@@ -866,6 +869,7 @@ def _get_friendly_name(function: Callable[[_T], _U]) -> str:
     return _make_valid_friendly_name(friendly_name)
 
 
+@log_call_async(include_args=[])
 async def run_function(
     function: Union[Callable[..., _T], str],
     host: Host,
@@ -962,6 +966,7 @@ async def run_function(
     return job_completion.result
 
 
+@eliot.log_call
 async def run_command(
     args: Union[str, Sequence[str]],
     host: Host,
@@ -1025,6 +1030,7 @@ async def run_command(
     return await host.run_job(job)
 
 
+@log_call_async
 async def run_map(
     function: Callable[[_T], _U],
     args: Sequence[_T],

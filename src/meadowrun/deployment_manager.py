@@ -12,6 +12,7 @@ from typing import Any, Callable, Coroutine, List, Optional, Sequence, Tuple, Un
 import filelock
 
 from meadowrun._vendor.aiodocker import exceptions as aiodocker_exceptions
+
 from meadowrun.aws_integration import s3
 from meadowrun.aws_integration.ecr import (
     get_ecr_helper,
@@ -36,6 +37,7 @@ from meadowrun.meadowrun_pb2 import (
     ServerAvailableContainer,
 )
 from meadowrun.run_job_core import CloudProviderType, ContainerRegistryHelper
+from meadowrun.shared import log_call_async
 
 _GIT_REPO_URL_SUFFIXES_TO_REMOVE = [".git", "/"]
 
@@ -281,6 +283,7 @@ async def _get_zip_file_code_paths(
     raise ValueError(f"Unknown URL scheme in {zip_file_url}")
 
 
+@log_call_async
 async def compile_environment_spec_to_container(
     environment_spec: Union[EnvironmentSpecInCode, EnvironmentSpec],
     interpreter_spec_path: str,

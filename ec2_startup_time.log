@@ -1,0 +1,34 @@
+{"action_status": "started", "timestamp": 1656148294.091414, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job.run_function", "task_level": [1]}
+{"action_status": "started", "timestamp": 1656148294.0931072, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job.AllocCloudInstance.run_job", "task_level": [2, 1]}
+{"region_name": "us-east-2", "action_status": "started", "timestamp": 1656148294.0932727, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2_ssh_keys.get_meadowrun_ssh_key", "task_level": [2, 2, 1]}
+{"action_status": "succeeded", "timestamp": 1656148294.6193988, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2_ssh_keys.get_meadowrun_ssh_key", "task_level": [2, 2, 2]}
+{"action_status": "started", "timestamp": 1656148294.6223452, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_allocation.allocate_jobs_to_instances", "task_level": [2, 3, 1]}
+{"action_status": "started", "timestamp": 1656148295.0875864, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_allocation._launch_new_instances", "task_level": [2, 3, 2, 1]}
+{"action_status": "started", "timestamp": 1656148295.852536, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2_pricing._get_ec2_instance_types", "task_level": [2, 3, 2, 2, 1]}
+{"action_status": "succeeded", "timestamp": 1656148313.877491, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2_pricing._get_ec2_instance_types", "task_level": [2, 3, 2, 2, 2]}
+{"action_status": "started", "timestamp": 1656148313.8778565, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_selection.choose_instance_types_for_job", "task_level": [2, 3, 2, 3, 1]}
+{"action_status": "succeeded", "timestamp": 1656148313.8785353, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_selection.choose_instance_types_for_job", "task_level": [2, 3, 2, 3, 2]}
+{"action_status": "started", "timestamp": 1656148313.8786528, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2.launch_ec2_instance", "task_level": [2, 3, 2, 4, 1]}
+{"action_status": "succeeded", "timestamp": 1656148315.6204267, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.aws_integration.ec2.launch_ec2_instance", "task_level": [2, 3, 2, 4, 2]}
+{"action_status": "started", "timestamp": 1656148315.620608, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "wait_until_running", "task_level": [2, 3, 2, 5, 1]}
+{"action_status": "succeeded", "timestamp": 1656148331.0451505, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "wait_until_running", "task_level": [2, 3, 2, 5, 2]}
+{"action_status": "succeeded", "timestamp": 1656148331.32091, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_allocation._launch_new_instances", "task_level": [2, 3, 2, 6]}
+{"action_status": "succeeded", "timestamp": 1656148331.3213935, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.instance_allocation.allocate_jobs_to_instances", "task_level": [2, 3, 3]}
+{"action_status": "started", "timestamp": 1656148331.3221283, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job_core.SshHost.run_job", "task_level": [2, 4, 1]}
+{"action_status": "started", "timestamp": 1656148331.3285499, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "wait_for_ssh_connection", "task_level": [2, 4, 2, 1]}
+{"action_status": "started", "timestamp": 1656148331.3294249, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job_core._retry", "task_level": [2, 4, 2, 2, 1]}
+{"action_status": "succeeded", "timestamp": 1656148333.1547747, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job_core._retry", "task_level": [2, 4, 2, 2, 2]}
+{"action_status": "succeeded", "timestamp": 1656148333.1549153, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "wait_for_ssh_connection", "task_level": [2, 4, 2, 3]}
+{"action_status": "started", "timestamp": 1656148333.1549578, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "remote mkdir", "task_level": [2, 4, 3, 1]}
+{"action_status": "succeeded", "timestamp": 1656148333.5236382, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "remote mkdir", "task_level": [2, 4, 3, 2]}
+{"action_status": "started", "timestamp": 1656148333.5240486, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "serialize and send job", "task_level": [2, 4, 4, 1]}
+{"action_status": "succeeded", "timestamp": 1656148334.5531774, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "serialize and send job", "task_level": [2, 4, 4, 2]}
+{"action_status": "started", "timestamp": 1656148334.5533407, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "run job", "task_level": [2, 4, 5, 1]}
+{"action_status": "succeeded", "timestamp": 1656148343.812238, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "run job", "task_level": [2, 4, 5, 2]}
+{"action_status": "started", "timestamp": 1656148343.8127284, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "get result", "task_level": [2, 4, 6, 1]}
+{"action_status": "succeeded", "timestamp": 1656148344.6702764, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "get result", "task_level": [2, 4, 6, 2]}
+{"action_status": "started", "timestamp": 1656148344.6703994, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "cleanup", "task_level": [2, 4, 7, 1]}
+{"action_status": "succeeded", "timestamp": 1656148344.8859837, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "cleanup", "task_level": [2, 4, 7, 2]}
+{"action_status": "succeeded", "timestamp": 1656148344.886878, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job_core.SshHost.run_job", "task_level": [2, 4, 8]}
+{"action_status": "succeeded", "timestamp": 1656148344.8893733, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job.AllocCloudInstance.run_job", "task_level": [2, 5]}
+{"action_status": "succeeded", "timestamp": 1656148344.8897233, "task_uuid": "96c06416-381d-49e7-95eb-159c312d7c6a", "action_type": "meadowrun.run_job.run_function", "task_level": [3]}

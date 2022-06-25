@@ -12,7 +12,7 @@ from meadowrun.instance_selection import (
     Resources,
     remaining_resources_sort_key,
 )
-from meadowrun.shared import assert_is_not_none
+from meadowrun.shared import assert_is_not_none, log_call_async
 from meadowrun.run_job_core import AllocCloudInstancesInternal
 
 
@@ -291,6 +291,7 @@ async def _choose_existing_instances(
     return allocated_jobs
 
 
+@log_call_async
 async def _launch_new_instances(
     instance_registrar: InstanceRegistrar,
     alloc_cloud_instances: AllocCloudInstancesInternal,
@@ -377,6 +378,7 @@ async def _launch_new_instances(
     return allocated_jobs
 
 
+@log_call_async
 async def allocate_jobs_to_instances(
     instance_registrar: InstanceRegistrar,
     alloc_cloud_instances: AllocCloudInstancesInternal,

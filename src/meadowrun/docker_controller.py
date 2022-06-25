@@ -37,6 +37,7 @@ from meadowrun._vendor.aiodocker import containers as aiodocker_containers
 import aiohttp
 
 import meadowrun.credentials
+from meadowrun.shared import log_call_async
 
 # When no registry domain is specified, docker assumes this as the registry domain.
 # I.e. `docker pull python:latest` is equivalent to `docker pull
@@ -274,6 +275,7 @@ async def _does_digest_exist_locally(image: str) -> bool:
         raise
 
 
+@log_call_async
 async def pull_image(
     image: str, credentials: Optional[meadowrun.credentials.RawCredentials]
 ) -> None:

@@ -60,7 +60,7 @@ from meadowrun.run_job_core import (
     JobCompletion,
     MeadowrunException,
 )
-from meadowrun.shared import pickle_exception
+from meadowrun.shared import log_call_async, pickle_exception
 
 ProcessStateEnum = ProcessState.ProcessStateEnum
 
@@ -283,6 +283,7 @@ def _prepare_py_function(
     )
 
 
+@log_call_async
 async def _launch_non_container_job(
     job_spec_type: Literal["py_command", "py_function"],
     job_spec_transformed: _JobSpecTransformed,
@@ -387,6 +388,7 @@ async def _launch_non_container_job(
     )
 
 
+@log_call_async
 async def _non_container_job_continuation(
     process: asyncio.subprocess.Process,
     job_spec_type: Literal["py_command", "py_function"],
@@ -427,6 +429,7 @@ async def _non_container_job_continuation(
         )
 
 
+@log_call_async
 async def _launch_container_job(
     job_spec_type: Literal["py_command", "py_function"],
     container_image_name: str,
@@ -518,6 +521,7 @@ async def _launch_container_job(
     )
 
 
+@log_call_async
 async def _container_job_continuation(
     container: aiodocker_containers.DockerContainer,
     docker_client: aiodocker.Docker,
@@ -754,6 +758,7 @@ async def _get_credentials_for_job(
     return code_deployment_credentials, interpreter_deployment_credentials
 
 
+@log_call_async
 async def run_local(
     job: Job,
     working_folder: Optional[str] = None,

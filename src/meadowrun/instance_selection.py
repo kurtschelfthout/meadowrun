@@ -5,6 +5,8 @@ import math
 from typing import Any, Dict, Optional, Tuple, List
 from typing_extensions import Literal
 
+import meadowrun.optional_eliot as eliot
+
 ON_DEMAND_OR_SPOT_VALUES: Tuple[OnDemandOrSpotType, OnDemandOrSpotType] = (
     "on_demand",
     "spot",
@@ -158,6 +160,7 @@ class CloudInstance:
     instance_type: ChosenCloudInstanceType
 
 
+@eliot.log_call(include_args=[], include_result=False)
 def choose_instance_types_for_job(
     resources_required: Resources,
     num_workers_to_allocate: int,
@@ -177,9 +180,9 @@ def choose_instance_types_for_job(
     time on the same instance types).
 
     TODO we should maybe have an option where e.g. if you want to allocate 53 workers
-     worth of capacity for a 100-task job, it makes more sense to allocate e.g. 55 or 60
-     workers worth of capacity rather than allocating a little machine for the last 3
-     workers of capacity
+    worth of capacity for a 100-task job, it makes more sense to allocate e.g. 55 or 60
+    workers worth of capacity rather than allocating a little machine for the last 3
+    workers of capacity
     """
 
     instance_types = []

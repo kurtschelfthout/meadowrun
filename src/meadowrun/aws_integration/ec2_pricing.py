@@ -12,11 +12,12 @@ from pkg_resources import resource_filename
 from meadowrun.aws_integration.aws_core import _boto3_paginate
 from meadowrun.instance_selection import CloudInstanceType
 from meadowrun.local_cache import get_cached_json, save_json_to_cache
-
+from meadowrun.shared import log_call_async
 
 _CACHED_EC2_PRICES_FILENAME = "aws_ec2_prices.json"
 
 
+@log_call_async
 async def _get_ec2_instance_types(region_name: str) -> List[CloudInstanceType]:
     """
     Gets a list of EC2 instance types and their prices in the format expected by

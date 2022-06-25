@@ -3,10 +3,10 @@ from __future__ import annotations
 import asyncio
 import ipaddress
 import threading
-from typing import Sequence, Optional, Dict, Any, TypeVar, Awaitable
+from typing import Any, Awaitable, Dict, Optional, Sequence, TypeVar
 
 import boto3
-
+import meadowrun.optional_eliot as eliot
 from meadowrun.aws_integration.aws_core import (
     MeadowrunNotInstalledError,
     _get_current_ip_for_ssh,
@@ -23,7 +23,7 @@ from meadowrun.instance_selection import (
     Resources,
     choose_instance_types_for_job,
 )
-
+from meadowrun.shared import log_call_async
 
 _T = TypeVar("_T")
 
@@ -126,6 +126,7 @@ def ensure_security_group(group_name: str) -> str:
     return security_group.id
 
 
+@log_call_async
 async def launch_ec2_instance(
     region_name: str,
     instance_type: str,
@@ -233,8 +234,9 @@ async def _launch_instance_continuation(instance: Any) -> str:
                 lambda: instance_running_future.set_exception(exception)
             )
 
-    threading.Thread(target=wait_until_running).start()
-    await instance_running_future
+    with eliot.start_action(action_type="wait_until_running"):
+        threading.Thread(target=wait_until_running).start()
+        await instance_running_future
 
     instance.load()
     if not instance.public_dns_name:

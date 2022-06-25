@@ -1,8 +1,8 @@
 import io
 
 import boto3
+import meadowrun.optional_eliot as eliot
 import paramiko
-
 from meadowrun.aws_integration.aws_core import wrap_access_or_install_errors
 from meadowrun.aws_integration.management_lambdas.ec2_alloc_stub import (
     ignore_boto3_error_code,
@@ -89,6 +89,7 @@ def _get_meadowrun_ssh_key_text(region_name: str) -> str:
     return secret_result["SecretString"]
 
 
+@eliot.log_call(include_result=False)
 def get_meadowrun_ssh_key(region_name: str) -> paramiko.PKey:
     """
     and returns a paramiko.PKey that is compatible with that EC2 key pair and can be
