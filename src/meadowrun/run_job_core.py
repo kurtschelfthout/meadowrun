@@ -147,7 +147,9 @@ class SshHost(Host):
 
                 with eliot.start_action(action_type="run job"):
                     command = (
-                        "/var/meadowrun/env/bin/python -m meadowrun.run_job_local_main "
+                        "/var/meadowrun/env/bin/python "
+                        "-X importtime "
+                        "-m meadowrun.run_job_local_main "
                         f"--job-id {job.job_id} "
                         f"--working-folder {remote_working_folder} "
                     )
