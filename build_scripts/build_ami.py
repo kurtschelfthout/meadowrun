@@ -128,7 +128,9 @@ from meadowrun.aws_integration.ec2_ssh_keys import (
 )
 
 _BASE_AMI = "ami-01344892e448f48c2"
-_NEW_AMI_NAME = "meadowrun-ec2alloc-{}-ubuntu-20.04.3-docker-20.10.12-python-3.9.5"
+_NEW_AMI_NAME = (
+    "meadowrun-ec2alloc-eliot-{}-ubuntu-20.04.3-docker-20.10.12-python-3.9.5"
+)
 
 
 async def build_meadowrun_ami():

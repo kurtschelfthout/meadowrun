@@ -133,6 +133,14 @@ class SshHost(Host):
                             job_to_run_serialized, remote=f"{job_io_prefix}.job_to_run"
                         )
 
+                # with eliot.start_action(action_type="EBS warmup"):
+                # full disk: sudo dd if=/dev/xvda1 of=/dev/null bs=1M
+                #     mkdir_result = connection.run(
+                #         "find /var/meadowrun/env/ -type f -exec "
+                #         "dd if={} of=/dev/null bs=1M status=none \\;",
+                #         in_stream=False,
+                #     )
+
                 # fabric doesn't have any async APIs, which means that in order to run
                 # more than one fabric command at the same time, we need to have a
                 # thread per fabric command. We use an asyncio.Future here to make the
@@ -148,7 +156,8 @@ class SshHost(Host):
                 with eliot.start_action(action_type="run job"):
                     command = (
                         "/var/meadowrun/env/bin/python "
-                        "-X importtime "
+                        # "-X importtime "
+                        # "-m cProfile -o remote.prof "
                         "-m meadowrun.run_job_local_main "
                         f"--job-id {job.job_id} "
                         f"--working-folder {remote_working_folder} "
@@ -197,6 +206,7 @@ class SshHost(Host):
                         process_state.ParseFromString(result_buffer.read())
 
                     connection.get(f"{job_io_prefix}-eliot.log", "remote_eliot.log")
+                    # connection.get("remote.prof", "remote.prof")
 
                     if process_state.state == ProcessState.ProcessStateEnum.SUCCEEDED:
                         job_spec_type = job.WhichOneof("job_spec")
